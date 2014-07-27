@@ -1,6 +1,14 @@
 Website::Application.routes.draw do
+  get "sessions/create"
+  get "sessions/destroy"
   get "users/new"
   get "welcome/index"
+  get 'auth/facebook/callback', to: 'sessions#create'
+  get 'auth/failure', to: redirect('/')
+  get 'signout', to: 'sessions#destroy', as: 'signout'
+
+  resources :sessions, only: [:create, :destroy]
+  resource :welcome, only: [:index]
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
