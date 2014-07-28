@@ -3,7 +3,7 @@ Website::Application.routes.draw do
   get "sessions/destroy"
   get "users/new"
   get "welcome/index"
-  get 'auth/facebook/callback', to: 'sessions#create'
+  get 'auth/:provider/callback', to: 'sessions#create'
   get 'auth/failure', to: redirect('/')
   get 'signout', to: 'sessions#destroy', as: 'signout'
 
