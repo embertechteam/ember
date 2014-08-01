@@ -1,4 +1,5 @@
 Website::Application.routes.draw do
+  devise_for :users, :controllers => { omniauth_callbacks: 'omniauth_callbacks' }
   get "users/new"
   get "welcome/index"
   # The priority is based upon order of creation: first created -> highest priority.
@@ -8,7 +9,8 @@ Website::Application.routes.draw do
   root 'welcome#index'
 
   match '/signup', to: 'users#new', via: 'get'
-
+  match '/users/:id/finish_signup' => 'users#finish_signup', via: [:get, :patch], :as => :finish_signup
+  
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
